@@ -1,0 +1,5 @@
+.mkd-clipboard-copy {
+  color: var(--ut-link-text-color);
+  text-decoration: none;
+  cursor: pointer;
+}
