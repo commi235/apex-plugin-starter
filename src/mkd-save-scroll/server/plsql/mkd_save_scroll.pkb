@@ -1,6 +1,7 @@
 create or replace package body mkd_save_scroll
 as
 
+  -- Start copying with line below
   subtype t_max_vc2 is varchar2(32767);
 
   function render
@@ -19,7 +20,7 @@ as
       p_plugin         => p_plugin
     , p_dynamic_action => p_dynamic_action
     );
-    l_result.javascript_function := 'function() { apexScrollUtil.';
+    l_result.javascript_function := 'function() { mkd.saveScroll.';
     case c_action
       when 'SAVE' then
         l_result.javascript_function := l_result.javascript_function || 'save(' || c_current_page || ')';
@@ -33,6 +34,7 @@ as
     l_result.javascript_function := l_result.javascript_function || '; }';
     return l_result;
   end render;
+  -- Stop copying after line above
 
 end mkd_save_scroll;
 /

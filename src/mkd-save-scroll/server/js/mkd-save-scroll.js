@@ -4,17 +4,28 @@ var mkd = mkd || {};
   const _storagePrefix = "apexSaveScrollPosition";
   const _itemName = "scrollPosition";
   const _myStorage = storage.getScopedSessionStorage({
-    prefix: storagePrefix,
+    prefix: _storagePrefix,
     useAppId: true,
     usePageId: true,
   });
 
   function _get() {
-    debug.trace();
-    return _myStorage.getItem(_itemName);
+    const scrollPos = _myStorage.getItem(_itemName);
+    debug.info("Get called", {
+      itemName: _itemName,
+      scrollTop: scrollPos,
+      storage: _myStorage,
+    });
+
+    return scrollPos;
   }
 
   _save = function () {
+    debug.info("Save called", {
+      itemName: _itemName,
+      scrollTop: $(window).scrollTop(),
+      storage: _myStorage,
+    });
     _myStorage.setItem(_itemName, $(window).scrollTop());
   };
 
@@ -23,6 +34,7 @@ var mkd = mkd || {};
   };
 
   _clear = function () {
+    debug.info("Clear called");
     _myStorage.clear();
   };
 
